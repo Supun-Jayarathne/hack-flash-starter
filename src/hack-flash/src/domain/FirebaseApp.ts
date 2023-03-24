@@ -15,12 +15,12 @@ import { Vehicle } from "./Vehicle";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: "",
+  apiKey: "AIzaSyD1rnLZ4DCLqXKfAJPrwWnMCCZAerTqxXM",
+  authDomain: "bistechack.firebaseapp.com",
+  projectId: "bistechack",
+  storageBucket: "bistechack.appspot.com",
+  messagingSenderId: "688222406466",
+  appId: "1:688222406466:web:c60a131f6532f19a65aadb"
 };
 
 // Initialize Firebase
@@ -46,6 +46,29 @@ export async function findVehicle(licensePlate: string) {
   const data = querySnapshot.docs[0]?.data() as Vehicle;
 
   console.log(data);
+
+  return data;
+}
+
+export async function addFuelRecord(fuel: FuelRequest) {
+  // Add a new document in collection "fuelRequest"
+  const docRef = await addDoc(collection(db, "fuelRequest"), fuel);
+  return docRef;
+}
+
+export async function findUsedFuel(licensePlate: string) {
+  // Add a new document in collection "fuelRequest"
+
+  const q = query(
+    collection(db, "fuelRequest"),
+    where("licensePlate", "==", licensePlate)
+  );
+
+  const querySnapshot = await getDocs(q);
+
+  const data = querySnapshot.docs[0]?.data() as FuelRequest;
+
+  console.log('fuelRequest querySnapshot',querySnapshot);
 
   return data;
 }

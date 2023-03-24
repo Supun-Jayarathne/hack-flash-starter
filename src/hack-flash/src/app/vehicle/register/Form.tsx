@@ -14,6 +14,8 @@ const submitRequest = async (
     method: "POST",
     body: JSON.stringify(vehicle),
   });
+  console.log("respone",respone);
+  
   return respone.json();
 };
 
